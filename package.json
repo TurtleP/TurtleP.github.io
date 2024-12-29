@@ -1,0 +1,29 @@
+{
+  "name": "blog",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.10",
+    "@astrojs/tailwind": "^5.1.4",
+    "@fortawesome/fontawesome-free": "^6.7.2",
+    "@tailwindcss/typography": "^0.5.15",
+    "astro": "^5.1.1",
+    "lightgallery": "^2.8.2",
+    "markdown-it": "^14.1.0",
+    "use-dark-mode": "^2.3.1"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^14.1.2",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "sass-embedded": "^1.83.0",
+    "tailwindcss": "^3.4.17",
+    "vite-tsconfig-paths": "^5.1.4"
+  }
+}
