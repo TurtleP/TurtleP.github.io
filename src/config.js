@@ -5,8 +5,8 @@ export const config = {
     profileImage: "/avatar.jpg",
     links: [
         { name: "Home", href: "", match: "^/$" },
-        { name: "Archive", href: "archive",  match: "^/archive|^/posts" },
-        { name: "VRChat Memories", href: "gallery", match: "^/gallery" },
+        { name: "Archive", href: "archive/1",  match: "^/archive|^/posts" },
+        { name: "VRChat Memories", href: "gallery/1", match: "^/gallery" },
         { name: "About", href: "about", match: "^/about" },
     ]
 };

@@ -10,13 +10,15 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 const currentPath = Astro.url.pathname;
 
 function isActiveLink(linkHref: string) {
-  if (currentPath.includes("/posts/")) {
-    return linkHref === "archive";
+  const basePath = `/${linkHref}`;
+
+  if (linkHref.includes("archive")) {
+    return currentPath.includes("/posts/") || currentPath.includes("/archive/");
   }
 
   return linkHref === ""
     ? currentPath === "/"
-    : currentPath.startsWith(`/${linkHref}`);
+    : currentPath.startsWith(basePath);
 }
 
 function generateTitle(link: { name: string; href: string }) {
