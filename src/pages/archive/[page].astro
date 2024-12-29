@@ -6,9 +6,12 @@ import PostCard from "../../components/PostCard.astro";
 import PaginationControls from "../../components/PaginationControls.astro";
 
 export async function getStaticPaths({ paginate }) {
-  const posts = (await getCollection("blog")).sort(
-    (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
-  );
+  const posts = (await getCollection("blog", ({ data }) => data.draft !== true))
+    .sort(
+      (a, b) =>
+        new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
+    )
+    .slice(4);
   return paginate(posts, { pageSize: 4 });
 }
 
