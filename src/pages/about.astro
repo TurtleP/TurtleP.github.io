@@ -1,14 +1,14 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import AboutContent from "../content/about.md";
+import Layout from '../layouts/Layout.astro';
+import AboutContent from '../content/about.md';
 ---
 
 <Layout>
-    <div
-        class="flex flex-col justify-center items-center mx-auto max-w-prose py-4 h-full"
-    >
-        <article class="prose dark:prose-dark prose-lg">
-            <AboutContent />
-        </article>
-    </div>
+  <div
+    class="flex flex-col justify-center items-center mx-auto py-4 h-full px-4 sm:px-6 lg:px-8"
+  >
+    <article class="prose dark:prose-dark prose-lg max-w-full sm:max-w-prose">
+      <AboutContent />
+    </article>
+  </div>
 </Layout>

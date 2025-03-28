@@ -1,0 +1,11 @@
+---
+import DesktopNav from './DesktopNav.astro';
+import MobileNav from './MobileNav.astro';
+
+const { links, isActiveLink } = Astro.props;
+---
+
+<header>
+  <DesktopNav links={links} isActiveLink={isActiveLink} />
+  <MobileNav links={links} />
+</header>
