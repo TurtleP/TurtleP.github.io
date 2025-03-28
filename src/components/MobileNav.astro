@@ -32,7 +32,7 @@ const { links, pathname } = Astro.props;
             href={`${link.href}`}
             class="hover:underline px-4 py-2 text-2xl"
             @click="isOpen = false"
-            :class=`"${pathname}" === "${link.href}" ? 'underline' : ''`
+            :class=`{ 'underline': new RegExp("${link.match}").test(active) }`
           >
             {link.name}
           </a>
