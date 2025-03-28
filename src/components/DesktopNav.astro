@@ -4,14 +4,14 @@ const { links, pathname } = Astro.props;
 
 <nav
   class="hidden md:flex justify-center space-x-8 py-4"
-  x-data="{ active: '' }"
+  x-data=`{ active: "${pathname}" }`
 >
   {
     links.map((link: { href: string; name: string }) => (
       <a
-        href={`${link.href}`}
+        href={link.href}
         class="relative text-lg font-medium dark:text-white transition-all duration-200 hover:underline"
-        :class=`"${link.href}" === "${pathname}" ? "underline" : ""`
+        :class=`{ 'underline': new RegExp("${link.match}").test(active) }`
       >
         {link.name}
       </a>
