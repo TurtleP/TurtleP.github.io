@@ -6,6 +6,7 @@ import { getCollection } from "astro:content";
 
 import { slugify } from "@/utilities";
 import "@styles/photo.css";
+import Tag from "@/components/Tag.astro";
 
 export async function getStaticPaths() {
     const albums = await getCollection("gallery");
@@ -19,12 +20,13 @@ export async function getStaticPaths() {
             props: {
                 image: photo.path,
                 comment: photo.comment,
+                friends: photo.users,
             },
         })),
     );
 }
 
-const { image, comment } = Astro.props;
+const { image, comment, friends } = Astro.props;
 ---
 
 <BaseHead />
@@ -33,7 +35,19 @@ const { image, comment } = Astro.props;
 <div class="photo-page">
     <div class="photo-container" transition:animate="slide">
         <img class="photo-full" src={image} />
-        <p>{comment}</p>
+        <div>
+            {
+                friends &&
+                    friends.length > 0 &&
+                    friends.map((friend) => <Tag name={friend} />)
+            }
+            <div>
+                <p>{comment}</p>
+            </div>
+            <div class="all-photos-container">
+                <a class="all-photos" href="/gallery">All Photos →</a>
+            </div>
+        </div>
     </div>
 </div>
 <Footer />
