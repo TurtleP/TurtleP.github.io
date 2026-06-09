@@ -1,0 +1,39 @@
+---
+import BaseHead from "@/components/BaseHead.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { getCollection } from "astro:content";
+
+import { slugify } from "@/utilities";
+import "@styles/photo.css";
+
+export async function getStaticPaths() {
+    const albums = await getCollection("gallery");
+
+    return albums.flatMap((album) =>
+        album.data.map((photo) => ({
+            params: {
+                year: album.id,
+                photo: slugify(photo.path),
+            },
+            props: {
+                image: photo.path,
+                comment: photo.comment,
+            },
+        })),
+    );
+}
+
+const { image, comment } = Astro.props;
+---
+
+<BaseHead />
+<Header />
+
+<div class="photo-page">
+    <div class="photo-container" transition:animate="slide">
+        <img class="photo-full" src={image} />
+        <p>{comment}</p>
+    </div>
+</div>
+<Footer />

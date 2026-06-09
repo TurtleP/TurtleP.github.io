@@ -1,0 +1,49 @@
+---
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+
+import { getCollection } from "astro:content";
+import { slugify } from "@/utilities";
+
+export async function getStaticPaths({ paginate }) {
+    const photos = await getCollection("gallery");
+    return paginate(photos, { pageSize: 1 });
+}
+
+const { page } = Astro.props;
+const album = page.data[0];
+
+import "@styles/gallery.css";
+import "@styles/pagination.css";
+---
+
+<BaseHead />
+<Header />
+<h3 class="album-year">{album.id}</h3>
+<div class="gallery-grid">
+    {
+        album.data.map((photo) => (
+            <a
+                class="gallery-item"
+                aria-label={photo.path}
+                href={`/gallery/${album.id}/${slugify(photo.path)}`}
+            >
+                <img
+                    alt={photo.path}
+                    src={photo.path}
+                    alt={photo.title}
+                    loading="lazy"
+                />
+            </a>
+        ))
+    }
+</div>
+<div class="pagination-container">
+    <nav class="pagination">
+        {page.url.prev ? <a href={page.url.prev}>Previous</a> : null}
+        <span>Page {page.currentPage} of {page.lastPage}</span>
+        {page.url.next ? <a href={page.url.next}>Next</a> : null}
+    </nav>
+</div>
+<Footer />
