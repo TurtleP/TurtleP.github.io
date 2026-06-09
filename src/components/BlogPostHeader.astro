@@ -1,0 +1,33 @@
+---
+import FormattedDate from "@components/FormattedDate.astro";
+import Tag from "@components/Tag.astro";
+
+type Props = {
+    title: string;
+    date: Date;
+    tags?: string[];
+};
+
+const { title, date, tags } = Astro.props;
+import "@styles/blogpost.css";
+---
+
+<header class="title">
+    <div class="date">
+        <FormattedDate date={date} />
+    </div>
+
+    <h1>{title}</h1>
+
+    {
+        tags && tags.length > 0 && (
+            <div class="tags">
+                {tags.map((tag) => (
+                    <Tag name={tag} />
+                ))}
+            </div>
+        )
+    }
+
+    <hr />
+</header>

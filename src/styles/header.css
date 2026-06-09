@@ -1,0 +1,78 @@
+.branding-container {
+    display: flex;
+    align-items: center;
+    margin: 1%;
+    justify-content: center;
+    @media (max-width: 600px) {
+        margin: 5%;
+    }
+}
+
+.avatar-container {
+    display: flex;
+    justify-content: center;
+}
+
+.avatar {
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+}
+
+.branding {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+}
+
+.site-meta {
+    text-align: center;
+}
+
+.site-description {
+    font-size: 0.85em;
+    padding-bottom: 0.15em;
+    font-weight: lighter;
+    color: var(--muted);
+}
+
+.site-text {
+    display: flex;
+    flex-direction: column;
+    color: var(--text);
+}
+
+.site-buttons {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+
+    > a {
+        color: var(--black);
+        text-decoration: none;
+    }
+}
+
+html.dark #icon-sun {
+    display: block;
+}
+
+html.dark #icon-moon {
+    display: none;
+}
+
+html:not(.dark) #icon-sun {
+    display: none;
+}
+
+html:not(.dark) #icon-moon {
+    display: block;
+}
+
+.site-nav {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    gap: 1em;
+    padding-top: 0.5rem;
+}

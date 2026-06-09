@@ -1,0 +1,15 @@
+.post-list {
+    align-content: center;
+}
+
+.pagination-container {
+    color: var(--muted);
+    padding-bottom: 1rem;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+}

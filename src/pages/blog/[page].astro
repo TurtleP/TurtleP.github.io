@@ -1,0 +1,57 @@
+---
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import PostCard from "@/components/PostCard.astro";
+import { config } from "@/site";
+
+import { getCollection } from "astro:content";
+import "@styles/pagination.css";
+
+export async function getStaticPaths({ paginate }) {
+    const posts = await getCollection("blog");
+
+    posts.sort(
+        (a, b) =>
+            new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+    );
+
+    return paginate(posts, {
+        pageSize: config.maxPostsPerPage,
+    });
+}
+
+const { page } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead title={config.title} description={config.description} />
+    </head>
+    <body>
+        <Header />
+        <main class="post-list">
+            {
+                page.data.map((post, index) => (
+                    <>
+                        <PostCard
+                            slug={post.id}
+                            page={page.currentPage}
+                            {...post.data}
+                        />
+                        {index < config.maxPostsPerPage - 1 && <hr />}
+                    </>
+                ))
+            }
+        </main>
+        <div class="pagination-container">
+            <nav class="pagination">
+                {page.url.prev ? <a href={page.url.prev}>Previous</a> : null}
+                <span>Page {page.currentPage} of {page.lastPage}</span>
+                {page.url.next ? <a href={page.url.next}>Next</a> : null}
+            </nav>
+        </div>
+        <Footer />
+    </body>
+</html>

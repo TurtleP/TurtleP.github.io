@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseHead from "@components/BaseHead.astro";
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+import BlogPostHeader from "@components/BlogPostHeader.astro";
+
+type Props = CollectionEntry<"blog">["data"];
+
+import { slide } from "astro:transitions";
+
+const { title, date, tags } = Astro.props;
+---
+
+<html lang="en">
+    <head>
+        <BaseHead />
+    </head>
+
+    <body>
+        <Header />
+        <main>
+            <article transition:animate={slide({ duration: "0.5s" })}>
+                <div class="prose">
+                    <BlogPostHeader title={title} date={date} tags={tags} />
+                    <slot />
+                    <hr />
+                    <div class="all-posts-container">
+                        <a href="#top">Back to Top</a>
+                        <a href={"/blog"}>All Posts →</a>
+                    </div>
+                </div>
+            </article>
+        </main>
+        <Footer />
+    </body>
+</html>

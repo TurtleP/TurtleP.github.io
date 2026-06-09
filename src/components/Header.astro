@@ -1,0 +1,69 @@
+---
+import { config } from "@/site";
+import HeaderLink from "@components/HeaderLink.astro";
+
+import { Icon } from "astro-icon/components";
+import "@styles/header.css";
+
+import { Image } from "astro:assets";
+import avatar from "@/assets/avatar.svg";
+---
+
+<head>
+    <script>
+        const toggle = document.getElementById("theme-toggle");
+        const root = document.documentElement;
+
+        toggle?.addEventListener("click", (e) => {
+            e.preventDefault();
+            const next =
+                root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+            root.setAttribute("data-theme", next);
+            localStorage.setItem("theme", next);
+        });
+    </script>
+</head>
+
+<header class="site-header">
+    <div class="branding-container">
+        <div class="branding">
+            <div class="avatar-container">
+                <Image class="avatar" src={avatar} alt="Avatar" />
+            </div>
+            <div class="site-text">
+                <div class="site-meta">
+                    <h4 class="site-title">{config.title}</h4>
+                    <h5 class="site-description">{config.description}</h5>
+                </div>
+                <div class="site-buttons">
+                    <a
+                        href="https://bsky.app/profile/serenafye.bsky.social"
+                        class="nav-button"
+                        aria-label="Bluesky"
+                        ><Icon name="fa7-brands:bluesky" size="32" /></a
+                    >
+                    <a
+                        href="https://github.com/TurtleP"
+                        class="nav-button"
+                        aria-label="GitHub"
+                        ><Icon name="fa7-brands:github" size="32" /></a
+                    >
+                    <a
+                        href="#"
+                        id="theme-toggle"
+                        class="nav-button"
+                        aria-label="Theme Toggle"
+                    >
+                        <Icon id="icon-sun" name="fa7-solid:sun" size="32" />
+                        <Icon id="icon-moon" name="fa7-solid:moon" size="32" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="site-nav">
+        <HeaderLink href="/">Home</HeaderLink>
+        <HeaderLink href="/blog">Archive</HeaderLink>
+        <HeaderLink href="/about">About</HeaderLink>
+    </div>
+</header>

@@ -1,7 +1,10 @@
 {
-  "name": "blog",
+  "name": "",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -9,21 +12,14 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.10",
-    "@astrojs/tailwind": "^5.1.4",
-    "@fortawesome/fontawesome-free": "^6.7.2",
-    "@tailwindcss/typography": "^0.5.15",
-    "astro": "^5.1.1",
-    "lightgallery": "^2.8.2",
-    "markdown-it": "^14.1.0",
-    "use-dark-mode": "^2.3.1"
-  },
-  "devDependencies": {
-    "@types/markdown-it": "^14.1.2",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.49",
-    "sass-embedded": "^1.83.0",
-    "tailwindcss": "^3.4.17",
-    "vite-tsconfig-paths": "^5.1.4"
+    "@astrojs/mdx": "^6.0.2",
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.3",
+    "@iconify-json/fa7-brands": "^1.2.2",
+    "@iconify-json/fa7-solid": "^1.2.4",
+    "@iconify-json/mdi": "^1.2.3",
+    "astro": "^6.4.4",
+    "astro-icon": "^1.1.5",
+    "sharp": "^0.34.3"
   }
 }

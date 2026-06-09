@@ -1,0 +1,21 @@
+.date {
+    font-size: 1rem;
+    padding-bottom: 0.25rem;
+    margin: 0;
+}
+
+.excerpt {
+    padding-top: 0;
+    margin: 0;
+    font-size: 1.15rem;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.read-more {
+    text-decoration: none;
+    font-size: 1rem;
+}

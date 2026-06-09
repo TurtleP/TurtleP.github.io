@@ -1,0 +1,11 @@
+---
+const today = new Date();
+import { config } from "@/site";
+
+import "@styles/footer.css";
+---
+
+<footer>
+    &copy; {today.getFullYear()}
+    {config.username}. All rights reserved.
+</footer>
