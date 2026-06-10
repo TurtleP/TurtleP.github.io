@@ -1,51 +1,49 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import photos from "../../gallery.json";
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
 
-import MarkdownIt from "markdown-it";
-export const md = new MarkdownIt();
+import { getCollection } from "astro:content";
+import { slugify } from "@/utilities";
 
-import GalleryPhoto from "../../components/GalleryPhoto.astro";
-import PaginationControls from "../../components/PaginationControls.astro";
-
-export function transformBURBName(users: Array<string>) {
-  const options = ["Uzuem", "Burb", "Uzume"]
-  return users.map((user) => {
-    if (user === "Uzume") {
-      return options[Math.floor(Math.random() * options.length)];
-    }
-    return user;
-  });
-}
-
-export const gallery = Object.entries(photos).map(([year, images]) => ({
-    year,
-    images: images.map((image) => ({
-        path: image.path,
-        comment: md.render(image.comment),
-        users: transformBURBName(image.users),
-    })),
-}));
-
-export function getStaticPaths({ paginate }) {
-    return paginate(gallery, { pageSize: 1 });
+export async function getStaticPaths({ paginate }) {
+    const photos = await getCollection("gallery");
+    return paginate(photos, { pageSize: 1 });
 }
 
 const { page } = Astro.props;
-const current = gallery[page.currentPage - 1];
+const album = page.data[0];
+
+import "@styles/gallery.css";
+import "@styles/pagination.css";
 ---
 
-<Layout>
-  {
-    <h2 class="text-2xl font-semibold text-center text-white dark:text-gray-400 py-4">{current.year}</h2>
-    <section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-4 px-4">
-      {
-        current.images.map((image) => (
-          <GalleryPhoto path={image.path} comment={image.comment} users={image.users} />
+<BaseHead />
+<Header />
+<h3 class="album-year">{album.id}</h3>
+<div class="gallery-grid">
+    {
+        album.data.map((photo) => (
+            <a
+                class="gallery-item"
+                aria-label={photo.path}
+                href={`/gallery/${album.id}/${slugify(photo.path)}`}
+            >
+                <img
+                    alt={photo.path}
+                    src={photo.path}
+                    alt={photo.title}
+                    loading="lazy"
+                />
+            </a>
         ))
-      }
-    </section>
-  }
-
-  <PaginationControls page={page} />
-</Layout>
+    }
+</div>
+<div class="pagination-container">
+    <nav class="pagination">
+        {page.url.prev ? <a href={page.url.prev}>Previous</a> : null}
+        <span>Page {page.currentPage} of {page.lastPage}</span>
+        {page.url.next ? <a href={page.url.next}>Next</a> : null}
+    </nav>
+</div>
+<Footer />

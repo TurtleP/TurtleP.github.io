@@ -1,12 +1,21 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import BaseHead from "@components/BaseHead.astro";
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+
+import { config } from "@/site";
 ---
 
-<Layout>
-    <!-- Page-Specific Content goes here -->
-    <section class="max-w-4xl mx-auto py-4 px-4 justify-center items-center">
-        <p class="text-center text-gray-600 dark:text-gray-400">
-            Page not found.
-        </p>
-    </section>
-</Layout>
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead title={config.title} description={config.description} />
+    </head>
+    <body>
+        <Header />
+        <main style="text-align: center; padding: 2rem; align-items: center;">
+            <p>Page not found.</p>
+        </main>
+        <Footer />
+    </body>
+</html>

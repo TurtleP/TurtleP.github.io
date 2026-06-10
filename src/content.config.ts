@@ -1,20 +1,25 @@
-import { defineCollection, z } from 'astro:content';
-import { glob } from 'astro/loaders';
-import { rssSchema } from '@astrojs/rss';
-
-const rssFeed = defineCollection({
-  schema: rssSchema,
-});
+import { defineCollection } from "astro:content";
+import { glob, file } from "astro/loaders";
+import { z } from "astro/zod";
 
 const blog = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: 'src/blog' }),
-  schema: z.object({
-    title: z.string().nonempty('Title is required'),
-    date: z.date(),
-    excerpt: z.string().nonempty('Excerpt is required'),
-    tags: z.array(z.string()).optional(),
-    draft: z.boolean().optional(),
-  }),
+    // Load Markdown and MDX files in the `src/content/blog/` directory.
+    loader: glob({
+        base: "./src/content/blog",
+        pattern: "**/*.{md,mdx}",
+    }),
+    // Type-check frontmatter using a schema
+    schema: ({ image }) =>
+        z.object({
+            title: z.string(),
+            date: z.coerce.date(),
+            excerpt: z.string().optional(),
+            tags: z.array(z.string()).optional(),
+        }),
 });
 
-export const collections = { blog, rssFeed };
+const gallery = defineCollection({
+    loader: file("src/data/gallery.json"),
+});
+
+export const collections = { blog, gallery };

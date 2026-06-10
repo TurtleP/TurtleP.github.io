@@ -1,0 +1,11 @@
+.photo-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    gap: 1.5rem;
+}
+
+.all-photos-container {
+    align-items: flex-end;
+}

@@ -1,0 +1,42 @@
+---
+// Import the global.css file here so that it is included on
+// all pages through the use of the <BaseHead /> component.
+import "@styles/global.css";
+import { config } from "@/site";
+import { Font } from "astro:assets";
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+import { ClientRouter } from "astro:transitions";
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" href="/favicon.ico" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link
+    rel="alternate"
+    type="application/rss+xml"
+    title={config.title}
+    href={new URL("rss.xml", Astro.site)}
+/>
+<meta name="generator" content={Astro.generator} />
+
+<Font cssVariable="--font-atkinson" preload />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Primary Meta Tags -->
+<title>{config.title}</title>
+<meta name="title" content={config.title} />
+<meta name="description" content={config.description} />
+<ClientRouter />
+<head>
+    <script is:inline>
+        const saved = localStorage.getItem("theme");
+        const prefers = matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = saved ?? (prefers ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+    </script>
+</head>

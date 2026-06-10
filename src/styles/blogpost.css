@@ -1,0 +1,32 @@
+main {
+    width: calc(100% - 2em);
+    max-width: 100%;
+}
+
+.prose {
+    width: 720px;
+    max-width: calc(100% - 2em);
+    margin: auto;
+    color: var(--gray-dark);
+}
+
+.title {
+    margin-bottom: 1em;
+    padding: 1em 0;
+    text-align: center;
+    line-height: 1;
+}
+
+.date {
+    margin-bottom: 0.5em;
+    color: var(--muted);
+}
+
+.last-updated-on {
+    font-style: italic;
+}
+
+.all-posts-container {
+    display: flex;
+    justify-content: space-between;
+}

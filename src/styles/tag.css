@@ -1,0 +1,18 @@
+.tag {
+    display: inline-block;
+    background: var(--text-gray-dark);
+    color: var(--text-gray-light);
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-right: 0.5rem;
+    padding: 0.125rem 0.625rem;
+    border-radius: 0.25rem;
+    line-height: 1.25rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .tag {
+        background: var(--text-gray-dark); /* gray-700 */
+        color: var(--text-gray-light); /* gray-300 */
+    }
+}
